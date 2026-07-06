@@ -315,6 +315,37 @@
     </div>
   </section>
 
+    <div style="text-align:center; padding: 3rem 1.5rem;">
+    <p style="color:#6b5252; margin-bottom:1rem; font-style:italic;">A song for you, babe ♥</p>
+    <button id="play-btn" style="
+      padding: 1rem 2rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      color: white;
+      background: linear-gradient(135deg, #b85c7a, #d4a574);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(184,92,122,0.4);
+    ">▶ Play Our Song</button>
+    <audio id="our-song" loop>
+      <source src="song.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    document.getElementById('play-btn').addEventListener('click', function() {
+      const audio = document.getElementById('our-song');
+      if (audio.paused) {
+        audio.play();
+        this.textContent = '⏸ Pause Our Song';
+      } else {
+        audio.pause();
+        this.textContent = '▶ Play Our Song';
+      }
+    });
+  </script>
+
   <footer>
     <p>Made with love for <span>babe</span> · 2026</p>
   </footer>

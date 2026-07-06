@@ -268,7 +268,7 @@
     <p class="hero-date">Since July 6, 2024 · <strong id="days">730</strong> days of us</p>
     <div class="hero-stats">
       <div><span class="stat-num">2</span><span class="stat-label">Years</span></div>
-      <div><span class="stat-num">∞</span><span class="stat-label">Forever</span></div>
+      <div><span class="stat-num" id="secret-heart" style="cursor:pointer">∞</span><span class="stat-label">Forever</span></div>
     </div>
   </header>
 
@@ -436,5 +436,14 @@
 
     tryLoadFromFolder();
   </script>
+
+<script>
+  let taps = 0;
+  document.getElementById('secret-heart').addEventListener('click', () => {
+    taps++;
+    if (taps >= 3) window.location.href = 'secret.html';
+  });
+</script>
+  
 </body>
 </html>

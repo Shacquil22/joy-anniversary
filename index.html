@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 2 Year Anniversary, Joy ♥</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #e8a0be;
+      --rose-dark: #b85c7a;
+      --gold: #d4a574;
+      --cream: #fff9f7;
+      --deep: #2a1a1f;
+      --text: #3d2c2c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+
+    /* Banner */
+    .banner {
+      background: linear-gradient(90deg, var(--rose-dark), #c77d8e, var(--gold));
+      color: white;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(232,160,190,0.25), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(212,165,116,0.15), transparent 45%),
+        var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '♥';
+      position: absolute;
+      font-size: 20rem;
+      opacity: 0.04;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .hero-label {
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 15vw, 9rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--rose-dark), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+    .hero-years {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .hero-date {
+      color: var(--rose-dark);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.75rem;
+      font-weight: 600;
+      color: var(--rose-dark);
+      display: block;
+    }
+    .stat-label { font-size: 0.8rem; color: #6b5252; }
+
+    /* Photo drop zone - VERY visible */
+    .photo-drop {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto 3rem;
+      padding: 2.5rem 1.5rem;
+      border: 3px dashed var(--rose);
+      border-radius: 20px;
+      background: white;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .photo-drop:hover, .photo-drop.dragover {
+      border-color: var(--rose-dark);
+      background: #fff5f8;
+      transform: scale(1.01);
+    }
+    .photo-drop.hidden { display: none; }
+    .photo-drop-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+    .photo-drop h3 {
+      font-size: 1.4rem;
+      color: var(--rose-dark);
+      margin-bottom: 0.5rem;
+    }
+    .photo-drop p { color: #6b5252; font-size: 0.95rem; }
+
+    /* Gallery */
+    .section {
+      padding: 5rem 1.5rem;
+    }
+    .section:nth-child(even) { background: #f5ebe3; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: #6b5252;
+      margin-bottom: 2.5rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      box-shadow: 0 8px 30px rgba(61,44,44,0.12);
+      background: linear-gradient(135deg, #f5d0dc, #f0dcc4);
+    }
+    .gallery-item--wide { grid-column: span 2; aspect-ratio: 2/1; }
+    @media (max-width: 640px) {
+      .gallery-item--wide { grid-column: span 1; aspect-ratio: 1; }
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item figcaption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem;
+      background: linear-gradient(transparent, rgba(42,26,31,0.85));
+      color: white;
+      font-size: 0.95rem;
+    }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #6b5252;
+    }
+    .gallery-placeholder span { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    /* Letter */
+    .letter {
+      max-width: 650px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(61,44,44,0.1);
+    }
+    .letter-greeting {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--rose-dark);
+      margin-bottom: 1.5rem;
+    }
+    .letter p { margin-bottom: 1.2rem; color: #6b5252; font-size: 1.05rem; }
+    .letter-sign {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--rose-dark);
+      font-style: italic;
+      margin-top: 2rem;
+    }
+
+    /* Surprise */
+    .surprise-btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 2.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      color: white;
+      background: linear-gradient(135deg, var(--rose-dark), var(--gold));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(184,92,122,0.4);
+      transition: transform 0.3s;
+    }
+    .surprise-btn:hover { transform: scale(1.05); }
+    .surprise-msg {
+      text-align: center;
+      margin-top: 2rem;
+      display: none;
+    }
+    .surprise-msg.show { display: block; animation: fadeUp 0.8s ease; }
+    .surprise-msg h2 {
+      font-size: 2.5rem;
+      color: var(--rose-dark);
+      margin-top: 1rem;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--deep);
+      color: rgba(255,255,255,0.7);
+    }
+    footer span { color: var(--rose); }
+  </style>
+</head>
+<body>
+
+  <div class="banner">✦ Happy 2 Year Anniversary · July 6, 2026 ✦</div>
+
+  <header class="hero">
+    <p class="hero-label">For the love of my life</p>
+    <h1 class="hero-name">Joy</h1>
+    <p class="hero-years">2 Years Together</p>
+    <p class="hero-date">Since July 6, 2024 · <strong id="days">730</strong> days of us</p>
+    <div class="hero-stats">
+      <div><span class="stat-num">2</span><span class="stat-label">Years</span></div>
+      <div><span class="stat-num">∞</span><span class="stat-label">Forever</span></div>
+    </div>
+  </header>
+
+  <section class="section" id="photos">
+    <div class="container">
+      <h2 class="section-title">Our Memories</h2>
+      <p class="section-sub">Every photo is a moment I never want to forget, Joy.</p>
+
+      <div class="photo-drop" id="photo-drop">
+        <div class="photo-drop-icon">📷</div>
+        <h3>Add Your Photos Here</h3>
+        <p>Tap or drag your photos — they'll appear in the gallery below instantly.</p>
+        <input type="file" id="photo-input" accept="image/*" multiple hidden>
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">A Letter For You</h2>
+      <p class="section-sub">Words from my heart</p>
+      <div class="letter">
+        <p class="letter-greeting">My Dearest Joy,</p>
+        <p>Two years ago today, everything changed. I met you, and suddenly the world had more color, more laughter, and more love than I ever knew was possible.</p>
+        <p>From our Spur dates to popcorn nights, from dressed-up evenings to lazy couch selfies — every moment with you is my favorite. You are my best friend, my partner, and the love of my life.</p>
+        <p>Joy, thank you for choosing me. Thank you for every smile, every hug, and every day you've stood by my side. I love you more than words can say.</p>
+        <p>Here's to us — two years down, and a lifetime of love ahead.</p>
+        <p class="letter-sign">Forever yours, with all my love ♥</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center">
+      <h2 class="section-title">One More Thing...</h2>
+      <button class="surprise-btn" id="surprise-btn">Click for a surprise ♥</button>
+      <div class="surprise-msg" id="surprise-msg">
+        <p>Joy, you are the best thing that ever happened to me.</p>
+        <p>I love you more today than yesterday,<br>and I'll love you even more tomorrow.</p>
+        <h2>Happy 2 Year Anniversary! 💕</h2>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with love for <span>Joy</span> · 2026</p>
+  </footer>
+
+  <script>
+    const PHOTOS = [
+      { file: 'photos/01.jpg', caption: 'Date night smiles', wide: true },
+      { file: 'photos/02.jpg', caption: 'Couch cuddles' },
+      { file: 'photos/03.jpg', caption: 'Golden hour together' },
+      { file: 'photos/04.jpg', caption: 'My favorite selfie with you' },
+      { file: 'photos/05.jpg', caption: 'Popcorn date night' },
+      { file: 'photos/06.jpg', caption: 'Just us' },
+      { file: 'photos/07.jpg', caption: 'Stealing a kiss', wide: true },
+      { file: 'photos/08.jpg', caption: 'Dressed up for you' },
+      { file: 'photos/09.jpg', caption: 'Adventures in the park' },
+      { file: 'photos/10.jpg', caption: 'Our little family' },
+      { file: 'photos/11.jpg', caption: 'Forehead to forehead' },
+      { file: 'photos/12.jpg', caption: 'Beanie weather' },
+      { file: 'photos/13.jpg', caption: 'Spur date night' },
+      { file: 'photos/14.jpg', caption: 'Yahweh Fellowship day' },
+      { file: 'photos/15.jpg', caption: 'Always laughing with you' },
+      { file: 'photos/16.jpg', caption: 'Late night, just us' },
+      { file: 'photos/17.jpg', caption: 'Two years of joy' },
+      { file: 'photos/18.jpg', caption: 'Us, today' },
+      { file: 'photos/19.jpg', caption: 'My heart' },
+      { file: 'photos/20.jpg', caption: 'Forever us' },
+    ];
+
+    const gallery = document.getElementById('gallery');
+    const dropZone = document.getElementById('photo-drop');
+    const fileInput = document.getElementById('photo-input');
+    let loadedCount = 0;
+
+    function renderGallery(items) {
+      gallery.innerHTML = items.map((p, i) => {
+        const wide = p.wide || i === 0 ? ' gallery-item--wide' : '';
+        if (p.src) {
+          return `<figure class="gallery-item${wide}"><img src="${p.src}" alt="${p.caption}"><figcaption>${p.caption}</figcaption></figure>`;
+        }
+        return `<figure class="gallery-item${wide}"><div class="gallery-placeholder"><span>💕</span><p>${p.caption}</p></div><figcaption>${p.caption}</figcaption></figure>`;
+      }).join('');
+    }
+
+    function tryLoadFromFolder() {
+      let found = 0;
+      const items = PHOTOS.map(p => ({ ...p, src: p.file }));
+      renderGallery(items);
+
+      items.forEach((p, i) => {
+        const img = gallery.querySelectorAll('img')[i];
+        if (!img) return;
+        img.onload = () => { found++; if (found >= 1) dropZone.classList.add('hidden'); };
+        img.onerror = () => {
+          img.closest('.gallery-item').innerHTML =
+            `<div class="gallery-placeholder"><span>💕</span><p>${p.caption}</p></div><figcaption>${p.caption}</figcaption>`;
+        };
+      });
+    }
+
+    function loadFromFiles(files) {
+      const items = Array.from(files).map((file, i) => ({
+        src: URL.createObjectURL(file),
+        caption: (PHOTOS[i] && PHOTOS[i].caption) || `Memory ${i + 1}`,
+        wide: i === 0 || (PHOTOS[i] && PHOTOS[i].wide),
+      }));
+      renderGallery(items);
+      dropZone.classList.add('hidden');
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => { if (e.target.files.length) loadFromFiles(e.target.files); });
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) loadFromFiles(e.dataTransfer.files);
+    });
+
+    document.getElementById('surprise-btn').addEventListener('click', function() {
+      document.getElementById('surprise-msg').classList.add('show');
+      this.style.display = 'none';
+    });
+
+    const start = new Date('2024-07-06');
+    const days = Math.floor((Date.now() - start) / 86400000);
+    document.getElementById('days').textContent = days;
+
+    tryLoadFromFolder();
+  </script>
+</body>
+</html>

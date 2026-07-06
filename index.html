@@ -63,6 +63,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      pointer-events: none;
     }
     .hero-label {
       font-size: 0.85rem;
@@ -268,7 +269,10 @@
     <p class="hero-date">Since July 6, 2024 · <strong id="days">730</strong> days of us</p>
     <div class="hero-stats">
       <div><span class="stat-num">2</span><span class="stat-label">Years</span></div>
-      <div><span class="stat-num" id="secret-heart" style="cursor:pointer">∞</span><span class="stat-label">Forever</span></div>
+      <div id="secret-heart" style="cursor:pointer; padding: 1rem;">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Forever</span>
+      </div>
     </div>
   </header>
 
